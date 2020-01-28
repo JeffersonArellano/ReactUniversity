@@ -1,12 +1,51 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class FruitCard extends Component {
+  constructor() {
+    super();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    this.state = {
+      quantity: 0
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>{this.props.name}</h3>
+        <div>Quantity: {this.state.quantity}</div>
+        <button
+          onClick={() => {
+            this.setState({
+              quantity: this.state.quantity + 1
+            });
+          }}
+        >
+          +
+        </button>
+        <button
+          onClick={() => {
+            this.setState({
+              quantity: this.state.quantity - 1
+            });
+          }}
+        >
+          -
+        </button>
+        <hr />
+        <p>$ {this.props.price}</p>
+      </div>
+    );
+  }
+}
+
+const App = () => (
+  <div>
+    <FruitCard name={"Orange"} price={5.0} />
+    <FruitCard name={"Pineapple"} price={1.5} />
+    <FruitCard name="Apple" price={3.3} />
+  </div>
+);
+
+ReactDOM.render(<App />, document.getElementById("root"));

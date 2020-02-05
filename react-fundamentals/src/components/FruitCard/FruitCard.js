@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+//import "./FruitCard.css";
+import styles from "./FruitCard.module.css";
 
 class FruitCard extends Component {
   state = {
@@ -21,8 +23,11 @@ class FruitCard extends Component {
     });
 
   render() {
+    const hasItems = this.state.quantity > 0;
+    const activeClass = hasItems ? styles["card-active"] : "";
+    const classes = styles.card + " " + activeClass;
     return (
-      <div>
+      <div className={classes}>
         <h3>{this.props.name}</h3>
         <div>Quantity: {this.state.quantity}</div>
         <button onClick={this.add}>+</button>
@@ -30,6 +35,7 @@ class FruitCard extends Component {
         <button onClick={this.clear}>Clear</button>
         <hr />
         <p>$ {this.props.price}</p>
+        <p>Total Price: ${this.props.price * this.state.quantity}</p>
       </div>
     );
   }
